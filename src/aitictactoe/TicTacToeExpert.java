@@ -92,12 +92,12 @@ public class TicTacToeExpert {
                         case 4:
                         case 6:
                         case 8:{       
-                            nextMove=isPossWin();                   //if win or block at next move possible,go for it
+                            /*nextMove=isPossWin();                   //if block at next move possible,go for it
                             if(nextMove!=-1)
-                                go(nextMove);
-                            else{
+                                go(nextMove);*/
+                            //else{
                                 go(findBestMove(board)+1);
-                            }
+                            //}
                             if(evaluateBoard(board)==25){
                                     return 25;
                             }
