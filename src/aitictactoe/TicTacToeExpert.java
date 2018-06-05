@@ -346,14 +346,19 @@ public class TicTacToeExpert {
         }
         else{
             best=1000;
+            int worstForUser=-1000;                                               //user may or may not play ideally,hence the variable to maximise win chances
             for(int i=0;i<totalMoves;i++){
                 if(isBlank(i+1)){
                     board[i]=player;
                     best=Math.min(best,minimax(board,depth+1,!isMaximiserTurn));
+                    worstForUser=Math.max(worstForUser,minimax(board,depth+1,!isMaximiserTurn));
                     board[i]=BLANK;
                 }
-            }            
-        }
+            }
+            if(best>0){
+                return worstForUser-depth;
+            }
+        }        
         return best+depth;
     }
     private boolean isMovesLeft(int board[]){
