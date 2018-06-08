@@ -15,6 +15,8 @@ import java.util.Scanner;
 public class TicTacToeExpert {
     private int board[];//board of nine elements
     private final int totalMoves=9;
+    private static int computerWins=25;
+    private static int playerWins=-25;
     private final int BLANK = 2;
     private final int X = 3;
     private final int O = 5;
@@ -41,7 +43,7 @@ public class TicTacToeExpert {
         obj.printBoard();
         if (result == 0) {
             System.out.println("draw");
-        } else if(result==25){
+        } else if(result==computerWins){
             System.out.println("CPU wins");
         }
         else{
@@ -98,11 +100,11 @@ public class TicTacToeExpert {
                             //else{
                                 go(findBestMove(board)+1);
                             //}
-                            if(evaluateBoard(board)==25){
-                                    return 25;
+                            if(evaluateBoard(board)==computerWins){
+                                    return computerWins;
                             }
-                            else if(evaluateBoard(board)==-25){
-                                    return -25;
+                            else if(evaluateBoard(board)==playerWins){
+                                    return playerWins;
                             }
                         }    
                     }
@@ -246,15 +248,15 @@ public class TicTacToeExpert {
     private int decideWinner(int ch){
         if(isCompX){
             if(ch==X)
-                return 25;
+                return computerWins;
             else if(ch==O)
-                return -25;
+                return playerWins;
         }
         else{
             if(ch==O)
-                return 25;
+                return computerWins;
             else if(ch==X)
-                return -25;
+                return playerWins;
         }
         return -1;
     } 
