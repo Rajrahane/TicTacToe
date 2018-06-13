@@ -15,6 +15,8 @@ import java.util.Scanner;
 public class TicTacToeExpert {
     private int board[];//board of nine elements
     private final int totalMoves=9;
+    private static int computerWins=25;
+    private static int playerWins=-25;
     private final int BLANK = 2;
     private final int X = 3;
     private final int O = 5;
@@ -41,7 +43,7 @@ public class TicTacToeExpert {
         obj.printBoard();
         if (result == 0) {
             System.out.println("draw");
-        } else if(result==25){
+        } else if(result==computerWins){
             System.out.println("CPU wins");
         }
         else{
@@ -98,11 +100,11 @@ public class TicTacToeExpert {
                             //else{
                                 go(findBestMove(board)+1);
                             //}
-                            if(evaluateBoard(board)==25){
-                                    return 25;
+                            if(evaluateBoard(board)==computerWins){
+                                    return computerWins;
                             }
-                            else if(evaluateBoard(board)==-25){
-                                    return -25;
+                            else if(evaluateBoard(board)==playerWins){
+                                    return playerWins;
                             }
                         }    
                     }
@@ -148,96 +150,10 @@ public class TicTacToeExpert {
         
     private boolean isBlank(int i) {
         return board[i - 1] == BLANK ? true : false;       
-    }
-    
-    private int isPossWin() {
-        int total;
-        if (!isCompX) {
-            total = X*X*BLANK;
-        } else {
-            total = O*O*BLANK;
-        }
-        if (board[0] * board[1] * board[2] == total)//sleeping
-        {
-            if (isBlank(1)) {
-                return 1;
-            } else if (isBlank(2)) {
-                return 2;
-            } else {
-                return 3;
-            }
-        } else if (board[0] * board[3] * board[6] == total)//straight
-        {
-            if (isBlank(1)) {
-                return 1;
-            } else if (isBlank(4)) {
-                return 4;
-            } else {
-                return 7;
-            }
-        } else if (board[0] * board[4] * board[8] == total) {       //diag
-            if (isBlank(1)) {
-                return 1;
-            } else if (isBlank(5)) {
-                return 5;
-            } else {
-                return 9;
-            }
-        } else if (board[2] * board[5] * board[8] == total)//369
-        {
-            if (isBlank(3)) {
-                return 3;
-            } else if (isBlank(6)) {
-                return 6;
-            } else {
-                return 9;
-            }
-        } else if (board[2] * board[4] * board[6] == total)//357
-        {
-            if (isBlank(3)) {
-                return 3;
-            } else if (isBlank(5)) {
-                return 5;
-            } else {
-                return 7;
-            }
-        } else if (board[6] * board[7] * board[8] == total)//789
-        {
-            if (isBlank(7)) {
-                return 7;
-            } else if (isBlank(8)) {
-                return 8;
-            } else {
-                return 9;
-            }
-        } else if (board[3] * board[4] * board[5] == total) {//456
-            if (isBlank(4)) {
-                return 4;
-            } else if (isBlank(5)) {
-                return 5;
-            } else {
-                return 6;
-            }
-        } else if (board[1] * board[4] * board[7] == total) {//258
-            if (isBlank(2)) {
-                return 2;
-            } else if (isBlank(5)) {
-                return 5;
-            } else {
-                return 8;
-            }
-        }
-        
-        return -1;//not possible
-    }
-     private void go(int i) {        
+    }      
+    private void go(int i) {        
             board[i - 1] = isCompX ? X : O;        
-    }
-
-    private boolean opponentHasPlace(int i) {
-        return board[i-1]==player;
-    }
-
+    }    
     private int getRandomCorner() {                             //selects random corner-1,3,7 or 9
         int corners[]={1,3,7,9}; 
         int rnd=new Random().nextInt(corners.length);
@@ -246,15 +162,15 @@ public class TicTacToeExpert {
     private int decideWinner(int ch){
         if(isCompX){
             if(ch==X)
-                return 25;
+                return computerWins;
             else if(ch==O)
-                return -25;
+                return playerWins;
         }
         else{
             if(ch==O)
-                return 25;
+                return computerWins;
             else if(ch==X)
-                return -25;
+                return playerWins;
         }
         return -1;
     } 
