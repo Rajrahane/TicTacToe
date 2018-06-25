@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package aitictactoe;
+package TicTacToe;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -14,19 +14,19 @@ import java.util.Scanner;
  */
 public class TicTacToeExpert {
     private int board[];//board of nine elements
-    private final int totalMoves=9;
-    private static int computerWins=25;
-    private static int playerWins=-25;
-    private final int BLANK = 2;
-    private final int X = 3;
-    private final int O = 5;
+    private static final int TOTALMOVES=9;
+    private static final int COMPUTERWINS=25;
+    private static final int PLAYERWINS=-25;
+    private static final int BLANK = 2;
+    private static final int X = 3;
+    private static final int O = 5;
     private boolean isCompX=false;
     private int player=X;
     private int computer=O;
     private int turn;
     public TicTacToeExpert(){
-        board = new int[totalMoves];
-        for (int i = 0; i < totalMoves; i++) {
+        board = new int[TOTALMOVES];
+        for (int i = 0; i < TOTALMOVES; i++) {
             board[i] = BLANK;//BLANK
         }
         turn = 1;
@@ -43,7 +43,7 @@ public class TicTacToeExpert {
         obj.printBoard();
         if (result == 0) {
             System.out.println("draw");
-        } else if(result==computerWins){
+        } else if(result==COMPUTERWINS){
             System.out.println("CPU wins");
         }
         else{
@@ -52,14 +52,13 @@ public class TicTacToeExpert {
         sc.close();
     }
     
-    private int play(){
-        int nextMove;
+    private int play(){        
         if(isCompX){                                        // Comp plays odd turns           
-            for(;turn<=totalMoves;turn++){                           //9 turns
+            for(;turn<=TOTALMOVES;turn++){                           //9 turns
                 printBoard();
                 if (turn % 2 == 0)                          //PLayer's turn
                 {                                                                  
-                    board[getInput()-1] = O;
+                    board[getInput()] = O;
                 }
                 else{                                       //main logic here,CPU's turn
                     
@@ -67,27 +66,27 @@ public class TicTacToeExpert {
             }
         }
         else{                                               //Comp plays even turns            
-            for(;turn<=totalMoves;turn++){                           //9 turns
+            for(;turn<=TOTALMOVES;turn++){                           //9 turns
                 printBoard();
                 if (turn % 2 == 1)                          //PLayer's turn
                 {                   
-                    board[getInput()-1] = X;
+                    board[getInput()] = X;
                 }
                 else{                                       //main logic here,CPU's turn
                     switch(turn){
                         case 2:{
-                            if(!isBlank(5)){                        //center taken
-                                go(getRandomCorner());
+                            if(!isBlank(4)){                        //center taken
+                                go(getRandomCorner()-1);
                                                             //take any corner
                             }
-                            else if(!isBlank(1)||!isBlank(3)||!isBlank(7)||!isBlank(9)){    //corner taken
-                                go(5);                              //take center
+                            else if(!isBlank(0)||!isBlank(2)||!isBlank(6)||!isBlank(8)){    //corner taken
+                                go(4);                              //take center
                             }
                             else{                                   //edge taken
-                                if(!isBlank(2)||!isBlank(6))
-                                    go(3);
+                                if(!isBlank(1)||!isBlank(5))
+                                    go(2);
                                 else
-                                    go(7);
+                                    go(6);
                             }
                             break;
                         }
@@ -96,15 +95,15 @@ public class TicTacToeExpert {
                         case 8:{       
                             /*nextMove=isPossWin();                   //if block at next move possible,go for it
                             if(nextMove!=-1)
-                                go(nextMove);*/
+                                go(nextMove-1);*/
                             //else{
-                                go(findBestMove(board)+1);
+                                go(findBestMove(board));
                             //}
-                            if(evaluateBoard(board)==computerWins){
-                                    return computerWins;
+                            if(evaluateBoard(board)==COMPUTERWINS){
+                                    return COMPUTERWINS;
                             }
-                            else if(evaluateBoard(board)==playerWins){
-                                    return playerWins;
+                            else if(evaluateBoard(board)==PLAYERWINS){
+                                    return PLAYERWINS;
                             }
                         }    
                     }
@@ -114,20 +113,20 @@ public class TicTacToeExpert {
         return 0;
     }
     
-    private int getInput(){
+    private int getInput(){                             // returns 0 based moveValue
         int nextMove;
         Scanner sc = new Scanner(System.in);
         do{
                nextMove=sc.nextInt();
-               if(!isBlank(nextMove))
+               if(!isBlank(nextMove-1))
                     System.out.println("Invalid Input,Re-enter");
-        }while(!isBlank(nextMove));
+        }while(!isBlank(nextMove-1));
         //sc.close();
-        return nextMove;
+        return nextMove-1;
     }
     
     private void printBoard() {
-        for (int i = 0; i < totalMoves; i++) {
+        for (int i = 0; i < TOTALMOVES; i++) {
             if (i % 3 == 0) {
                 System.out.println();
             }
@@ -148,29 +147,29 @@ public class TicTacToeExpert {
         computer=X;
     }
         
-    private boolean isBlank(int i) {
-        return board[i - 1] == BLANK ? true : false;       
+    private boolean isBlank(int i) {                        // 0 based Indexing
+        return board[i] == BLANK ? true : false;       
     }      
-    private void go(int i) {        
-            board[i - 1] = isCompX ? X : O;        
+    private void go(int i) {                                        //0 based indexing
+            board[i] = isCompX ? X : O;        
     }    
     private int getRandomCorner() {                             //selects random corner-1,3,7 or 9
-        int corners[]={1,3,7,9}; 
+        int corners[]={1,3,7,9};                                // 1 based indexing
         int rnd=new Random().nextInt(corners.length);
         return corners[rnd];
     }
     private int decideWinner(int ch){
         if(isCompX){
             if(ch==X)
-                return computerWins;
+                return COMPUTERWINS;
             else if(ch==O)
-                return playerWins;
+                return PLAYERWINS;
         }
         else{
             if(ch==O)
-                return computerWins;
+                return COMPUTERWINS;
             else if(ch==X)
-                return playerWins;
+                return PLAYERWINS;
         }
         return -1;
     } 
@@ -222,8 +221,8 @@ public class TicTacToeExpert {
         int bestValue=-1000;
         int bestMove=-1;
         int moveValue;
-        for(int i=0;i<totalMoves;i++){
-            if(isBlank(i+1)){
+        for(int i=0;i<TOTALMOVES;i++){
+            if(isBlank(i)){
                 board[i]=computer;
                 moveValue=minimax(board,0,false);
                 board[i]=BLANK;
@@ -251,8 +250,8 @@ public class TicTacToeExpert {
         int best;
         if(isMaximiserTurn){
             best=-1000;
-            for(int i=0;i<totalMoves;i++){
-                if(isBlank(i+1)){
+            for(int i=0;i<TOTALMOVES;i++){
+                if(isBlank(i)){
                     board[i]=computer;
                     best=Math.max(best,minimax(board,depth+1,!isMaximiserTurn));
                     board[i]=BLANK;
@@ -263,8 +262,8 @@ public class TicTacToeExpert {
         else{
             best=1000;
             int worstForUser=-1000;                                               //user may or may not play ideally,hence the variable to maximise win chances
-            for(int i=0;i<totalMoves;i++){
-                if(isBlank(i+1)){
+            for(int i=0;i<TOTALMOVES;i++){
+                if(isBlank(i)){
                     board[i]=player;
                     best=Math.min(best,minimax(board,depth+1,!isMaximiserTurn));
                     worstForUser=Math.max(worstForUser,minimax(board,depth+1,!isMaximiserTurn));
@@ -278,7 +277,7 @@ public class TicTacToeExpert {
         return best+depth;
     }
     private boolean isMovesLeft(int board[]){
-        for (int i = 0; i<totalMoves; i++)        
+        for (int i = 0; i<TOTALMOVES; i++)        
             if (board[i]==BLANK)
                 return true;
         return false;
