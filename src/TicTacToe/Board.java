@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package aitictactoe;
+package TicTacToe;
 
 /**
  *
@@ -13,23 +13,21 @@ package aitictactoe;
 public class Board {
 
     private int board[];//board of nine elements
-    static final int computerWins=25;
-    static final int playerWins=-25;
-    static final int TOTALMOVES=9;    
-    static final int BLANK = 2;
-    static final int X = 3;
-    static final int O = 5;
+    public static final int COMPUTERWINS=25;
+    public static final int PLAYERWINS=-25;
+    public static final int TOTALMOVES=9;    
+    public static final int BLANK = 2;
+    public static final int X = 3;
+    public static final int O = 5;
     private boolean isCompX=false;
     private int player=X;
-    private int computer=O;
-    private int turn;
+    private int computer=O;    
 
     public Board(){
         board = new int[TOTALMOVES];
         for (int i = 0; i < TOTALMOVES; i++) {
             board[i] = BLANK;//BLANK
-        }
-        turn = 1;
+        }        
     }
     public void printBoard() {
         for (int i = 0; i < TOTALMOVES; i++) {
@@ -49,15 +47,15 @@ public class Board {
     private int decideWinner(int ch){
         if(isCompX){
             if(ch==X)
-                return computerWins;
+                return COMPUTERWINS;
             else if(ch==O)
-                return playerWins;
+                return PLAYERWINS;
         }
         else{
             if(ch==O)
-                return computerWins;
+                return COMPUTERWINS;
             else if(ch==X)
-                return playerWins;
+                return PLAYERWINS;
         }
         return -1;
     } 

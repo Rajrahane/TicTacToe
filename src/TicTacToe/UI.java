@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package aitictactoe;
+package TicTacToe;
 
 import java.util.Scanner;
 
@@ -26,7 +26,7 @@ public class UI {
         board.printBoard();
         if (result == 0) {
             System.out.println("draw");
-        } else if(result==board.computerWins){
+        } else if(result==Board.COMPUTERWINS){
             System.out.println("CPU wins");
         }
         else{
@@ -38,7 +38,7 @@ public class UI {
     private int play(Board board,AI ai){
         int turn=1;
         if(board.isCompX()){                                        // Comp plays odd turns           
-            for(;turn<=board.TOTALMOVES;turn++){                           //9 turns
+            for(;turn<=Board.TOTALMOVES;turn++){                           //9 turns
                 board.printBoard();
                 if (turn % 2 == 0)                          //PLayer's turn
                 {                                                                  
@@ -50,7 +50,7 @@ public class UI {
             }
         }
         else{                                               //Comp plays even turns            
-            for(;turn<=board.TOTALMOVES;turn++){                           //9 turns
+            for(;turn<=Board.TOTALMOVES;turn++){                           //9 turns
                 board.printBoard();
                 if (turn % 2 == 1)                          //PLayer's turn
                 {                   
@@ -78,11 +78,11 @@ public class UI {
                         case 8:{  
                             board.setBoardIndex(ai.findBestMove(board), board.getComputer());                                
                             
-                            if(board.evaluateBoard(board.getBoard())==board.computerWins){
-                                    return board.computerWins;
+                            if(board.evaluateBoard(board.getBoard())==Board.COMPUTERWINS){
+                                    return Board.COMPUTERWINS;
                             }
-                            else if(board.evaluateBoard(board.getBoard())==board.playerWins){
-                                    return board.playerWins;
+                            else if(board.evaluateBoard(board.getBoard())==Board.PLAYERWINS){
+                                    return Board.PLAYERWINS;
                             }
                         }    
                     }
