@@ -9,4 +9,4 @@ Improved minimax algorithm to maximise win chances.
 
 If the worst case scenario is a draw, a best case move, if available, is played.  
 
-Please have a look at TicTacToe/TicTacToe.docx for the detailed explanation of the improvements.
+Please have a look at https://github.com/Rajrahane/TicTacToe/blob/master/TicTacToe.docx for the detailed explanation of the improvements.
