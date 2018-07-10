@@ -7,7 +7,7 @@ Creates a Game Tree and applies Depth First Search (DFS) to find the best possib
 Randomises moves using the Random library funtion.<br>
 <br><br><br><br>Improved minimax algorithm to maximise win chances.<br>
 That is, if the worst case scenario is a draw, a best case move(win), if available, is played.<br>
-<img src="Document%20Images/imple1.png" align="left"><br>
+<img src="Document%20Images/imple1.png" align="left" height="700" width="1000"><br>
 
 <br><br><br><br><br><br><br><br><br><b>Q)Improvement Details?</b><br>
 Check out the documentation <a href="https://github.com/Rajrahane/TicTacToe/blob/master/TicTacToe.pdf">here</a>
