@@ -7,5 +7,5 @@ Randomises moves using the Random library funtion.<br>
 Improved minimax algorithm to maximise win chances.<br>
 That is, if the worst case scenario is a draw, a best case move(win), if available, is played.<br>
 <b>Q)Improvement Details?</b><br>
-Find out <a href="https://github.com/Rajrahane/TicTacToe/blob/master/TicTacToe.pdf">here</a>
+Check out the documentation <a href="https://github.com/Rajrahane/TicTacToe/blob/master/TicTacToe.pdf">here</a>
 
