@@ -1,5 +1,6 @@
 # TicTacToe
 <b>Q)What is it?</b><br>
+<img src="" align="middle"><br>
 A Tic Tac Toe Game based on Minimax Algorithm.Develop an AI that beats the player in every game.Try your best to defeat it.<br>
 <b>Q)How Does it work?</b><br>
 Creates a Game Tree and applies Depth First Search (DFS) to find the best possible move.<br>
