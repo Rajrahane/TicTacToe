@@ -19,8 +19,13 @@ public class UI {
         AI ai=new AI();
         System.out.println("Enter type:1-X? or 2-O");
         int option = sc.nextInt();
-        if (option == 2) {
-            board.setPlayers();
+        if (option == 1) {
+            board.setPlayerToX(true);
+        }
+        System.out.println("Play First?:Yes-1,No-0");
+        option=sc.nextInt();
+        if(option==1){
+            board.letPlayerPlayFirst(true);
         }
         int result = ui.play(board,ai);
         board.printBoard();
@@ -37,7 +42,7 @@ public class UI {
     
     private int play(Board board,AI ai){
         int turn=1;
-        if(board.isCompX()){                                        // Comp plays odd turns           
+        if(!board.isPlayerFirst()){                                        // Comp plays odd turns           
             for(;turn<=Board.TOTAL_MOVES;turn++){                           //9 turns
                 board.printBoard();
                 if (turn % 2 == 0)                          //PLayer's turn
@@ -45,7 +50,18 @@ public class UI {
                     board.setBoardIndex(this.getInput(board), board.getPlayer());                    
                 }
                 else{                                       //main logic here,CPU's turn
-                    
+                    if(turn==1){
+                        board.setBoardIndex(ai.getRandomCorner()-1,board.getComputer());
+                    }
+                    else{
+                        board.setBoardIndex(ai.findBestMove(board), board.getComputer());
+                        if(board.evaluateBoard()==Board.COMPUTER_WINS){
+                                return Board.COMPUTER_WINS;
+                        }
+                        else if(board.evaluateBoard()==Board.PLAYER_WINS){
+                                return Board.PLAYER_WINS;
+                        }
+                    }
                 }
             }
         }

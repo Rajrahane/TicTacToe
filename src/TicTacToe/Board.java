@@ -19,15 +19,17 @@ public class Board {
     public static final int BLANK = 2;
     public static final int X = 3;
     public static final int O = 5;
-    private boolean isCompX=false;
-    private int player=X;
-    private int computer=O;    
+    private boolean isPlayerFirst;
+    private int player;
+    private int computer;    
 
     public Board(){
         board = new int[TOTAL_MOVES];
         for (int i = 0; i < TOTAL_MOVES; i++) {
             board[i] = BLANK;//BLANK
-        }        
+        }
+        setPlayerToX(false);
+        letPlayerPlayFirst(false);
     }
     public void printBoard() {
         for (int i = 0; i < TOTAL_MOVES; i++) {
@@ -45,18 +47,12 @@ public class Board {
         System.out.println();
     }
     private int decideWinner(int ch){
-        if(isCompX){
-            if(ch==X)
-                return COMPUTER_WINS;
-            else if(ch==O)
-                return PLAYER_WINS;
+        if(ch==computer){
+            return COMPUTER_WINS;
         }
-        else{
-            if(ch==O)
-                return COMPUTER_WINS;
-            else if(ch==X)
-                return PLAYER_WINS;
-        }
+        else if(ch==player){
+            return PLAYER_WINS;
+        }        
         return -1;
     } 
     public int evaluateBoard(){
@@ -112,21 +108,28 @@ public class Board {
                 return true;
         return false;
     }
-    public void setPlayers() {
-        isCompX = true;//cpu is X
-        player=O;
-        computer=X;
+    public void setPlayerToX(boolean set) {
+        if(set){
+            player=X;
+            computer=O;
+        }
+        else{
+            player=O;
+            computer=X;
+        }            
     }
-    
+    public void letPlayerPlayFirst(boolean let){
+        isPlayerFirst=let;
+    }
+    public boolean isPlayerFirst(){
+        return isPlayerFirst;
+    }
     public int getComputer(){
         return computer;
     }
     public int getPlayer(){
         return player;
-    }
-    public boolean isCompX(){
-        return isCompX;
-    }
+    }    
     public int[] getBoard(){
         return board;
     }
