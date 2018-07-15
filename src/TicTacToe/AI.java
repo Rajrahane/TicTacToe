@@ -33,7 +33,7 @@ public class AI {
         return bestMove;
     }
     private int minimax(int[] board,int depth,boolean isMaximiserTurn,Board Board){
-        int score=Board.evaluateBoard(board);
+        int score=Board.evaluateBoard();
         if(score>0){                            //computer wins
             return score-depth;
         }
@@ -41,7 +41,7 @@ public class AI {
             return score+depth;
         }        
         
-        if(!Board.isMovesLeft(board)){
+        if(!Board.isMovesLeft()){
             return 0;
         }
         int best;

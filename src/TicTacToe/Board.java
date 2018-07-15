@@ -59,7 +59,7 @@ public class Board {
         }
         return -1;
     } 
-    public int evaluateBoard(int []board){
+    public int evaluateBoard(){
         int result;
         if(board[0]==board[4]&& board[4]==board[8]){          //diag1
             result=decideWinner(board[0]);
@@ -106,7 +106,7 @@ public class Board {
     public boolean isBlank(int i) {                        // 0 based Indexing
         return board[i] == BLANK ? true : false;       
     }
-    public boolean isMovesLeft(int board[]){
+    public boolean isMovesLeft(){
         for (int i = 0; i<TOTALMOVES; i++)        
             if (board[i]==BLANK)
                 return true;

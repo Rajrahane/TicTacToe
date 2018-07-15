@@ -78,10 +78,10 @@ public class UI {
                         case 8:{  
                             board.setBoardIndex(ai.findBestMove(board), board.getComputer());                                
                             
-                            if(board.evaluateBoard(board.getBoard())==Board.COMPUTERWINS){
+                            if(board.evaluateBoard()==Board.COMPUTERWINS){
                                     return Board.COMPUTERWINS;
                             }
-                            else if(board.evaluateBoard(board.getBoard())==Board.PLAYERWINS){
+                            else if(board.evaluateBoard()==Board.PLAYERWINS){
                                     return Board.PLAYERWINS;
                             }
                         }    
