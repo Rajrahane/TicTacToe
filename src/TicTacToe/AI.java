@@ -18,7 +18,7 @@ public class AI {
         int bestValue=-1000;
         int bestMove=-1;
         int moveValue;
-        for(int i=0;i<Board.TOTALMOVES;i++){
+        for(int i=0;i<Board.TOTAL_MOVES;i++){
             if(Board.isBlank(i)){
                 board[i]=Board.getComputer();
                 moveValue=minimax(board,0,false,Board);
@@ -47,7 +47,7 @@ public class AI {
         int best;
         if(isMaximiserTurn){
             best=-1000;
-            for(int i=0;i<Board.TOTALMOVES;i++){
+            for(int i=0;i<Board.TOTAL_MOVES;i++){
                 if(Board.isBlank(i)){
                     board[i]=Board.getComputer();
                     best=Math.max(best,minimax(board,depth+1,!isMaximiserTurn,Board));
@@ -59,7 +59,7 @@ public class AI {
         else{
             best=1000;
             int worstForUser=-1000;                                               //user may or may not play ideally,hence the variable to maximise win chances
-            for(int i=0;i<Board.TOTALMOVES;i++){
+            for(int i=0;i<Board.TOTAL_MOVES;i++){
                 if(Board.isBlank(i)){
                     board[i]=Board.getPlayer();
                     best=Math.min(best,minimax(board,depth+1,!isMaximiserTurn,Board));

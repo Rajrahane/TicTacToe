@@ -13,9 +13,9 @@ package TicTacToe;
 public class Board {
 
     private int board[];//board of nine elements
-    public static final int COMPUTERWINS=25;
-    public static final int PLAYERWINS=-25;
-    public static final int TOTALMOVES=9;    
+    public static final int COMPUTER_WINS=25;
+    public static final int PLAYER_WINS=-25;
+    public static final int TOTAL_MOVES=9;    
     public static final int BLANK = 2;
     public static final int X = 3;
     public static final int O = 5;
@@ -24,13 +24,13 @@ public class Board {
     private int computer=O;    
 
     public Board(){
-        board = new int[TOTALMOVES];
-        for (int i = 0; i < TOTALMOVES; i++) {
+        board = new int[TOTAL_MOVES];
+        for (int i = 0; i < TOTAL_MOVES; i++) {
             board[i] = BLANK;//BLANK
         }        
     }
     public void printBoard() {
-        for (int i = 0; i < TOTALMOVES; i++) {
+        for (int i = 0; i < TOTAL_MOVES; i++) {
             if (i % 3 == 0) {
                 System.out.println();
             }
@@ -47,15 +47,15 @@ public class Board {
     private int decideWinner(int ch){
         if(isCompX){
             if(ch==X)
-                return COMPUTERWINS;
+                return COMPUTER_WINS;
             else if(ch==O)
-                return PLAYERWINS;
+                return PLAYER_WINS;
         }
         else{
             if(ch==O)
-                return COMPUTERWINS;
+                return COMPUTER_WINS;
             else if(ch==X)
-                return PLAYERWINS;
+                return PLAYER_WINS;
         }
         return -1;
     } 
@@ -107,7 +107,7 @@ public class Board {
         return board[i] == BLANK ? true : false;       
     }
     public boolean isMovesLeft(){
-        for (int i = 0; i<TOTALMOVES; i++)        
+        for (int i = 0; i<TOTAL_MOVES; i++)        
             if (board[i]==BLANK)
                 return true;
         return false;

@@ -26,7 +26,7 @@ public class UI {
         board.printBoard();
         if (result == 0) {
             System.out.println("draw");
-        } else if(result==Board.COMPUTERWINS){
+        } else if(result==Board.COMPUTER_WINS){
             System.out.println("CPU wins");
         }
         else{
@@ -38,7 +38,7 @@ public class UI {
     private int play(Board board,AI ai){
         int turn=1;
         if(board.isCompX()){                                        // Comp plays odd turns           
-            for(;turn<=Board.TOTALMOVES;turn++){                           //9 turns
+            for(;turn<=Board.TOTAL_MOVES;turn++){                           //9 turns
                 board.printBoard();
                 if (turn % 2 == 0)                          //PLayer's turn
                 {                                                                  
@@ -50,7 +50,7 @@ public class UI {
             }
         }
         else{                                               //Comp plays even turns            
-            for(;turn<=Board.TOTALMOVES;turn++){                           //9 turns
+            for(;turn<=Board.TOTAL_MOVES;turn++){                           //9 turns
                 board.printBoard();
                 if (turn % 2 == 1)                          //PLayer's turn
                 {                   
@@ -78,11 +78,11 @@ public class UI {
                         case 8:{  
                             board.setBoardIndex(ai.findBestMove(board), board.getComputer());                                
                             
-                            if(board.evaluateBoard()==Board.COMPUTERWINS){
-                                    return Board.COMPUTERWINS;
+                            if(board.evaluateBoard()==Board.COMPUTER_WINS){
+                                    return Board.COMPUTER_WINS;
                             }
-                            else if(board.evaluateBoard()==Board.PLAYERWINS){
-                                    return Board.PLAYERWINS;
+                            else if(board.evaluateBoard()==Board.PLAYER_WINS){
+                                    return Board.PLAYER_WINS;
                             }
                         }    
                     }
