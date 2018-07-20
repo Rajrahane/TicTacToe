@@ -3,14 +3,14 @@
  * and open the template in the editor.
  */
 
-package tictactoe.example;
+package com.raj.tictactoe.example;
 
 import java.util.Random;
 import java.util.Scanner;
 
 /**
  *01 April 2018
- * @Raj Rahane
+ * @Rajvaibhav Rahane
  */
 public class TicTacToeExpert {
     private int board[];//board of nine elements

@@ -3,11 +3,13 @@
  * and open the template in the editor.
  */
 
-package tictactoe.model;
+package com.raj.tictactoe.model;
+
+import com.raj.tictactoe.constants.GameConstants;
 
 /**
  *
- * @Raj Rahane
+ * @Rajvaibhav Rahane
  * 12 June 2018
  */
 public class Board {

@@ -3,11 +3,11 @@
  * and open the template in the editor.
  */
 
-package tictactoe.model;
+package com.raj.tictactoe.constants;
 
 /**
  *
- * @Vis Rahane
+ * @Rajvaibhav Rahane
  */
 public class GameConstants {
     public static final int X = 3;

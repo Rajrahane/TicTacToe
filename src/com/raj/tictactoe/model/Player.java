@@ -3,11 +3,11 @@
  * and open the template in the editor.
  */
 
-package tictactoe.model;
+package com.raj.tictactoe.model;
 
 /**
  *
- * @Vis Rahane
+ * @Rajvaibhav Rahane
  */
 public class Player {
     private int chanceNo;           //1-First or 2-Second
