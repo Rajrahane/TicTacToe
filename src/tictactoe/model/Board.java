@@ -5,6 +5,8 @@
 
 package tictactoe.model;
 
+import tictactoe.constants.GameConstants;
+
 /**
  *
  * @Rajvaibhav Rahane

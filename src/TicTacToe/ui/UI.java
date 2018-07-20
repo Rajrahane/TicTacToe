@@ -8,7 +8,7 @@ package tictactoe.ui;
 import tictactoe.ai.AI;
 import tictactoe.model.Board;
 import java.util.Scanner;
-import tictactoe.model.GameConstants;
+import tictactoe.constants.GameConstants;
 import tictactoe.model.Player;
 
 /**
