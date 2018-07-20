@@ -34,8 +34,8 @@ public class AI {
         }
         return bestMove;
     }
-    private int minimax(int[] board,int depth,boolean isMaximiserTurn,Board Board,Player player,Player computer){
-        int score=Board.evaluateBoard(player,computer);
+    private int minimax(int[] board,int depth,boolean isMaximiserTurn,Board gameBoard,Player player,Player computer){
+        int score=gameBoard.evaluateBoard(player,computer);
         if(score>0){                            //computer wins
             return score-depth;
         }
@@ -43,16 +43,16 @@ public class AI {
             return score+depth;
         }        
         
-        if(!Board.isMovesLeft()){
+        if(!gameBoard.isMovesLeft()){
             return 0;
         }
         int best;
         if(isMaximiserTurn){
             best=-1000;
             for(int i=0;i<Board.TOTAL_MOVES;i++){
-                if(Board.isBlank(i)){
+                if(gameBoard.isBlank(i)){
                     board[i]=computer.getType();
-                    best=Math.max(best,minimax(board,depth+1,!isMaximiserTurn,Board,player,computer));
+                    best=Math.max(best,minimax(board,depth+1,!isMaximiserTurn,gameBoard,player,computer));
                     board[i]=Board.BLANK;
                 }
             }
@@ -62,10 +62,10 @@ public class AI {
             best=1000;
             int worstForUser=-1000;                                               //user may or may not play ideally,hence the variable to maximise win chances
             for(int i=0;i<Board.TOTAL_MOVES;i++){
-                if(Board.isBlank(i)){
+                if(gameBoard.isBlank(i)){
                     board[i]=player.getType();
-                    best=Math.min(best,minimax(board,depth+1,!isMaximiserTurn,Board,player,computer));
-                    worstForUser=Math.max(worstForUser,minimax(board,depth+1,!isMaximiserTurn,Board,player,computer));
+                    best=Math.min(best,minimax(board,depth+1,!isMaximiserTurn,gameBoard,player,computer));
+                    worstForUser=Math.max(worstForUser,minimax(board,depth+1,!isMaximiserTurn,gameBoard,player,computer));
                     board[i]=Board.BLANK;
                 }
             }

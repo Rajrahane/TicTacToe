@@ -12,6 +12,6 @@ package com.raj.tictactoe.constants;
 public class GameConstants {
     public static final int X = 3;
     public static final int O = 5;
-    public static final int firstChance = 1;
-    public static final int secondChance = 2;
+    public static final int FIRST_CHANCE = 1;
+    public static final int SECOND_CHANCE = 2;
 }

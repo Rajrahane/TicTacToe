@@ -44,7 +44,7 @@ public class UI {
     
     private int play(Board board,AI ai,Player player,Player computer){
         int turn=1;
-        if(computer.getChanceNo()==GameConstants.firstChance){                                        // Comp plays odd turns           
+        if(computer.getChanceNo()==GameConstants.FIRST_CHANCE){                                        // Comp plays odd turns           
             for(;turn<=Board.TOTAL_MOVES;turn++){                           //9 turns
                 board.printBoard();
                 if (turn % 2 == 0)                          //PLayer's turn
@@ -133,10 +133,10 @@ public class UI {
         }
         player.setChanceNo(chanceNo);
         if(chanceNo==1){
-            computer.setChanceNo(GameConstants.secondChance);
+            computer.setChanceNo(GameConstants.SECOND_CHANCE);
         }
         else{
-            computer.setChanceNo(GameConstants.firstChance);
+            computer.setChanceNo(GameConstants.FIRST_CHANCE);
         }
     }
 }
