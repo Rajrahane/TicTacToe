@@ -7,7 +7,7 @@ package tictactoe.model;
 
 /**
  *
- * @Vis Rahane
+ * @Rajvaibhav Rahane
  */
 public class Player {
     private int chanceNo;           //1-First or 2-Second

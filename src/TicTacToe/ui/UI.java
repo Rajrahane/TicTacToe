@@ -13,7 +13,7 @@ import tictactoe.model.Player;
 
 /**
  *
- * @Raj Rahane
+ * @Rajvaibhav Rahane
  */
 public class UI {
     public static void main(String args[]){

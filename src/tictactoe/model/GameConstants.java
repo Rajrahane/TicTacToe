@@ -7,7 +7,7 @@ package tictactoe.model;
 
 /**
  *
- * @Vis Rahane
+ * @Rajvaibhav Rahane
  */
 public class GameConstants {
     public static final int X = 3;

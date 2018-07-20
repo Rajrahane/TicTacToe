@@ -11,7 +11,7 @@ import tictactoe.model.Player;
 
 /**
  *
- * @Raj Rahane
+ * @Rajvaibhav Rahane
  * 12 June 2018
  */
 public class AI {
