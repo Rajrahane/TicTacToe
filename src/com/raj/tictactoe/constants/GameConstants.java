@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package tictactoe.constants;
+package com.raj.tictactoe.constants;
 
 /**
  *

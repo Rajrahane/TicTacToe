@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package tictactoe.example;
+package com.raj.tictactoe.example;
 
 import java.util.Random;
 import java.util.Scanner;

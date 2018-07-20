@@ -3,13 +3,13 @@
  * and open the template in the editor.
  */
 
-package tictactoe.ui;
+package com.raj.tictactoe.ui;
 
-import tictactoe.ai.AI;
-import tictactoe.model.Board;
+import com.raj.tictactoe.ai.AI;
 import java.util.Scanner;
-import tictactoe.constants.GameConstants;
-import tictactoe.model.Player;
+import com.raj.tictactoe.constants.GameConstants;
+import com.raj.tictactoe.model.Board;
+import com.raj.tictactoe.model.Player;
 
 /**
  *

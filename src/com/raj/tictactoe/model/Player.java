@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package tictactoe.model;
+package com.raj.tictactoe.model;
 
 /**
  *

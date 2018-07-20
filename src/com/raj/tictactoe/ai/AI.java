@@ -3,11 +3,11 @@
  * and open the template in the editor.
  */
 
-package tictactoe.ai;
+package com.raj.tictactoe.ai;
 
-import tictactoe.model.Board;
 import java.util.Random;
-import tictactoe.model.Player;
+import com.raj.tictactoe.model.Board;
+import com.raj.tictactoe.model.Player;
 
 /**
  *
