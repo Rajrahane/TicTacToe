@@ -3,9 +3,11 @@
  * and open the template in the editor.
  */
 
-package TicTacToe;
+package tictactoe.ai;
 
+import tictactoe.model.Board;
 import java.util.Random;
+import tictactoe.model.Player;
 
 /**
  *
@@ -13,15 +15,15 @@ import java.util.Random;
  * 12 June 2018
  */
 public class AI {
-    public int findBestMove(Board Board){
+    public int findBestMove(Board Board,Player player,Player computer){
         int []board=Board.getBoard();
         int bestValue=-1000;
         int bestMove=-1;
         int moveValue;
-        for(int i=0;i<Board.TOTALMOVES;i++){
+        for(int i=0;i<Board.TOTAL_MOVES;i++){
             if(Board.isBlank(i)){
-                board[i]=Board.getComputer();
-                moveValue=minimax(board,0,false,Board);
+                board[i]=computer.getType();
+                moveValue=minimax(board,0,false,Board,player,computer);
                 board[i]=Board.BLANK;
                 
                 if(moveValue>bestValue){                    //***if multiple moves available, randomise
@@ -32,8 +34,8 @@ public class AI {
         }
         return bestMove;
     }
-    private int minimax(int[] board,int depth,boolean isMaximiserTurn,Board Board){
-        int score=Board.evaluateBoard(board);
+    private int minimax(int[] board,int depth,boolean isMaximiserTurn,Board Board,Player player,Player computer){
+        int score=Board.evaluateBoard(player,computer);
         if(score>0){                            //computer wins
             return score-depth;
         }
@@ -41,16 +43,16 @@ public class AI {
             return score+depth;
         }        
         
-        if(!Board.isMovesLeft(board)){
+        if(!Board.isMovesLeft()){
             return 0;
         }
         int best;
         if(isMaximiserTurn){
             best=-1000;
-            for(int i=0;i<Board.TOTALMOVES;i++){
+            for(int i=0;i<Board.TOTAL_MOVES;i++){
                 if(Board.isBlank(i)){
-                    board[i]=Board.getComputer();
-                    best=Math.max(best,minimax(board,depth+1,!isMaximiserTurn,Board));
+                    board[i]=computer.getType();
+                    best=Math.max(best,minimax(board,depth+1,!isMaximiserTurn,Board,player,computer));
                     board[i]=Board.BLANK;
                 }
             }
@@ -59,11 +61,11 @@ public class AI {
         else{
             best=1000;
             int worstForUser=-1000;                                               //user may or may not play ideally,hence the variable to maximise win chances
-            for(int i=0;i<Board.TOTALMOVES;i++){
+            for(int i=0;i<Board.TOTAL_MOVES;i++){
                 if(Board.isBlank(i)){
-                    board[i]=Board.getPlayer();
-                    best=Math.min(best,minimax(board,depth+1,!isMaximiserTurn,Board));
-                    worstForUser=Math.max(worstForUser,minimax(board,depth+1,!isMaximiserTurn,Board));
+                    board[i]=player.getType();
+                    best=Math.min(best,minimax(board,depth+1,!isMaximiserTurn,Board,player,computer));
+                    worstForUser=Math.max(worstForUser,minimax(board,depth+1,!isMaximiserTurn,Board,player,computer));
                     board[i]=Board.BLANK;
                 }
             }
