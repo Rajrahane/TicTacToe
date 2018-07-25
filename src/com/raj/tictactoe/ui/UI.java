@@ -6,10 +6,10 @@
 package com.raj.tictactoe.ui;
 
 import com.raj.tictactoe.ai.AI;
-import java.util.Scanner;
 import com.raj.tictactoe.constants.GameConstants;
 import com.raj.tictactoe.model.Board;
 import com.raj.tictactoe.model.Player;
+import java.util.Scanner;
 
 /**
  *
@@ -49,14 +49,14 @@ public class UI {
                 board.printBoard();
                 if (turn % 2 == 0)                          //PLayer's turn
                 {                                                                  
-                    board.setBoardIndex(this.getInput(board), player.getType());                    
+                    board.setBoardIndex(this.getInput(board), player.getMoveValue());                    
                 }
                 else{                                       //main logic here,CPU's turn
                     if(turn==1){
-                        board.setBoardIndex(ai.getRandomCorner()-1,computer.getType());
+                        board.setBoardIndex(ai.getRandomCorner()-1,computer.getMoveValue());
                     }
                     else{
-                        board.setBoardIndex(ai.findBestMove(board,player,computer), computer.getType());
+                        board.setBoardIndex(ai.findBestMove(board,player,computer), computer.getMoveValue());
                         if(board.evaluateBoard(player,computer)==Board.COMPUTER_WINS){
                                 return Board.COMPUTER_WINS;
                         }
@@ -72,29 +72,29 @@ public class UI {
                 board.printBoard();
                 if (turn % 2 == 1)                          //PLayer's turn
                 {                   
-                    board.setBoardIndex(this.getInput(board), player.getType()); 
+                    board.setBoardIndex(this.getInput(board), player.getMoveValue()); 
                 }
                 else{                                       //main logic here,CPU's turn
                     switch(turn){
                         case 2:{
                             if(!board.isBlank(4)){                        //center taken
-                                board.setBoardIndex(ai.getRandomCorner()-1, computer.getType());//take any corner                        
+                                board.setBoardIndex(ai.getRandomCorner()-1, computer.getMoveValue());//take any corner                        
                             }
                             else if(!board.isBlank(0)||!board.isBlank(2)||!board.isBlank(6)||!board.isBlank(8)){    //corner taken
-                                board.setBoardIndex(4, computer.getType());                               //take center
+                                board.setBoardIndex(4, computer.getMoveValue());                               //take center
                             }
                             else{                                   //edge taken
                                 if(!board.isBlank(1)||!board.isBlank(5))
-                                    board.setBoardIndex(2, computer.getType());                                    
+                                    board.setBoardIndex(2, computer.getMoveValue());                                    
                                 else
-                                    board.setBoardIndex(6, computer.getType());  
+                                    board.setBoardIndex(6, computer.getMoveValue());  
                             }
                             break;
                         }
                         case 4:
                         case 6:
                         case 8:{  
-                            board.setBoardIndex(ai.findBestMove(board,player,computer), computer.getType());                                
+                            board.setBoardIndex(ai.findBestMove(board,player,computer), computer.getMoveValue());                                
                             
                             if(board.evaluateBoard(player,computer)==Board.COMPUTER_WINS){
                                     return Board.COMPUTER_WINS;
@@ -124,12 +124,12 @@ public class UI {
 
     private void createPlayers(Player player,Player computer,int type,int chanceNo) {
         if(type==1){           
-            computer.setType(GameConstants.O);
-            player.setType(GameConstants.X);
+            computer.setMoveType(GameConstants.Move.O);
+            player.setMoveType(GameConstants.Move.X);
         }
         else{            
-            computer.setType(GameConstants.X);
-            player.setType(GameConstants.O);
+            computer.setMoveType(GameConstants.Move.X);
+            player.setMoveType(GameConstants.Move.O);
         }
         player.setChanceNo(chanceNo);
         if(chanceNo==1){

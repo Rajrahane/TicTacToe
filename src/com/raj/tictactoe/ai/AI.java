@@ -5,9 +5,9 @@
 
 package com.raj.tictactoe.ai;
 
-import java.util.Random;
 import com.raj.tictactoe.model.Board;
 import com.raj.tictactoe.model.Player;
+import java.util.Random;
 
 /**
  *
@@ -15,15 +15,15 @@ import com.raj.tictactoe.model.Player;
  * 12 June 2018
  */
 public class AI {
-    public int findBestMove(Board Board,Player player,Player computer){
-        int []board=Board.getBoard();
+    public int findBestMove(Board gameBoard,Player player,Player computer){
+        int []board=gameBoard.getBoard();
         int bestValue=-1000;
         int bestMove=-1;
         int moveValue;
         for(int i=0;i<Board.TOTAL_MOVES;i++){
-            if(Board.isBlank(i)){
-                board[i]=computer.getType();
-                moveValue=minimax(board,0,false,Board,player,computer);
+            if(gameBoard.isBlank(i)){
+                board[i]=computer.getMoveValue();
+                moveValue=minimax(board,0,false,gameBoard,player,computer);
                 board[i]=Board.BLANK;
                 
                 if(moveValue>bestValue){                    //***if multiple moves available, randomise
@@ -51,7 +51,7 @@ public class AI {
             best=-1000;
             for(int i=0;i<Board.TOTAL_MOVES;i++){
                 if(gameBoard.isBlank(i)){
-                    board[i]=computer.getType();
+                    board[i]=computer.getMoveValue();
                     best=Math.max(best,minimax(board,depth+1,!isMaximiserTurn,gameBoard,player,computer));
                     board[i]=Board.BLANK;
                 }
@@ -63,7 +63,7 @@ public class AI {
             int worstForUser=-1000;                                               //user may or may not play ideally,hence the variable to maximise win chances
             for(int i=0;i<Board.TOTAL_MOVES;i++){
                 if(gameBoard.isBlank(i)){
-                    board[i]=player.getType();
+                    board[i]=player.getMoveValue();
                     best=Math.min(best,minimax(board,depth+1,!isMaximiserTurn,gameBoard,player,computer));
                     worstForUser=Math.max(worstForUser,minimax(board,depth+1,!isMaximiserTurn,gameBoard,player,computer));
                     board[i]=Board.BLANK;
