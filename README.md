@@ -12,10 +12,13 @@ That is, if the worst case scenario is a draw, a best case move(win), if availab
 <br><br><br><br><br><br><br><br><br><b>Q)Improvement Details?</b><br>
 Check out the documentation <a href="https://github.com/Rajrahane/TicTacToe/blob/master/TicTacToe.pdf">here</a><br>
 <b><h2>Version History</h2></b><br>
+<b><h3>2.1</h3></b>
+<br>Player can now choose whether to play X/O
+<br>Player can now decide whether to play 1st/2nd
+<br><br><b><h3>2.0</h3></b>
+<br>Code is now more modular
 <b><h3>1.0</h3></b>
 <br>Improvement in Basic Minimax Algorithm
 <br>Randomisation Function Introduced
-<br><br><b><h3>2.0</h3></b>
-<br>Splitting of code into classes-AI,Board and UI
-<br>Code Improvements
+
 
