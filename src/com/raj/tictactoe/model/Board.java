@@ -33,7 +33,7 @@ public class Board {
             }
             if (board[i] == BLANK) {
                 System.out.print(" ?");
-            } else if (board[i] == GameConstants.X) {
+            } else if (board[i] == GameConstants.Move.X.getValue()) {
                 System.out.print(" X");
             } else {
                 System.out.print(" O");
@@ -42,10 +42,10 @@ public class Board {
         System.out.println();
     }
     private int decideWinner(int ch,Player player,Player computer){
-        if(ch==computer.getType()){
+        if(ch==computer.getMoveValue()){
             return COMPUTER_WINS;
         }
-        else if(ch==player.getType()){
+        else if(ch==player.getMoveValue()){
             return PLAYER_WINS;
         }        
         return -1;

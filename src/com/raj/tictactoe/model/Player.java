@@ -5,28 +5,28 @@
 
 package com.raj.tictactoe.model;
 
+import com.raj.tictactoe.constants.GameConstants;
+
 /**
  *
  * @Rajvaibhav Rahane
  */
 public class Player {
-    private int chanceNo;           //1-First or 2-Second
-    private int type;               //X or O
+    private int chanceNo;           //1-First or 2-Second               
+    private GameConstants.Move moveType;        //X or O
     
-    /*public Player(int chanceNo,int type){
-        this.chanceNo=chanceNo;
-        this.type=type;
-    }*/
     public void setChanceNo(int chanceNo){
         this.chanceNo=chanceNo;
     }
-    public void setType(int type){
-        this.type=type;
+    
+    public void setMoveType(GameConstants.Move moveType){
+            this.moveType=moveType;
     }
     public int getChanceNo(){
         return chanceNo;
     }
-    public int getType(){
-        return type;
-    }
+    
+    public int getMoveValue(){
+        return this.moveType.getValue();
+    }    
 }
