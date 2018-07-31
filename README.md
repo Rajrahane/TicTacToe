@@ -11,6 +11,7 @@ That is, if the worst case scenario is a draw, a best case move(win), if availab
 
 <br><br><br><br><br><br><br><br><br><b>Q)Improvement Details?</b><br>
 Check out the documentation <a href="https://github.com/Rajrahane/TicTacToe/blob/master/TicTacToe.pdf">here</a><br>
+<br><b>See this project's Android Version <a href="https://github.com/Rajrahane/Crosses-and-Noughts">here</a></b><br>
 <b><h2>Version History</h2></b><br>
 <b><h3>2.1</h3></b>
 <br>Player can now choose whether to play X/O
