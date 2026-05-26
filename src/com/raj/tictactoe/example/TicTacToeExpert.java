@@ -5,18 +5,31 @@
 
 package com.raj.tictactoe.example;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+class MoveEvaluation {
+    int guaranteed;
+    int potential;
+
+    MoveEvaluation(int guaranteed, int potential) {
+        this.guaranteed = guaranteed;
+        this.potential = potential;
+    }
+}
+
 /**
  *01 April 2018
+ * Updated : 26 May 2026
  * @Rajvaibhav Rahane
  */
 public class TicTacToeExpert {
     private int board[];//board of nine elements
     private static final int TOTAL_MOVES=9;
-    private static final int COMPUTER_WINS=25;
-    private static final int PLAYER_WINS=-25;
+    private static final int COMPUTER_WINS=100;
+    private static final int PLAYER_WINS=-100;
     private static final int BLANK = 2;
     private static final int X = 3;
     private static final int O = 5;
@@ -61,7 +74,14 @@ public class TicTacToeExpert {
                     board[getInput()] = O;
                 }
                 else{                                       //main logic here,CPU's turn
-                    
+                    go(findBestMove(board));
+
+                    if(evaluateBoard()==COMPUTER_WINS){
+                        return COMPUTER_WINS;
+                    }
+                    else if(evaluateBoard()==PLAYER_WINS){
+                        return PLAYER_WINS;
+                    }
                 }
             }
         }
@@ -76,17 +96,22 @@ public class TicTacToeExpert {
                     switch(turn){
                         case 2:{
                             if(!isBlank(4)){                        //center taken
-                                go(getRandomCorner()-1);
+                                go(findBestMove((board)));
+                                //go(getRandomCorner()-1);
                                                             //take any corner
                             }
                             else if(!isBlank(0)||!isBlank(2)||!isBlank(6)||!isBlank(8)){    //corner taken
-                                go(4);                              //take center
+                                go(findBestMove(board));
+                                //go(4);                              //take center
                             }
                             else{                                   //edge taken
+                                go(findBestMove(board));
+                                /*
                                 if(!isBlank(1)||!isBlank(5))
                                     go(2);
                                 else
                                     go(6);
+                                */
                             }
                             break;
                         }
@@ -218,63 +243,98 @@ public class TicTacToeExpert {
         return 0;                                             //draw
     }
     private int findBestMove(int []board){
-        int bestValue=-1000;
-        int bestMove=-1;
-        int moveValue;
+        int bestGuaranteed=Integer.MIN_VALUE;
+        int bestPotential = Integer.MIN_VALUE;
+
+        List<Integer> bestMoves = new ArrayList<>();
         for(int i=0;i<TOTAL_MOVES;i++){
             if(isBlank(i)){
                 board[i]=computer;
-                moveValue=minimax(board,0,false);
+                MoveEvaluation moveValue=minimax(board,0,false);
                 board[i]=BLANK;
+
+                System.out.println(i + " move " + moveValue.guaranteed + " " + moveValue.potential);
                 
-                if(moveValue>bestValue){                    //***if multiple moves available, randomise
-                    bestValue=moveValue;
-                    bestMove=i;
+                if(moveValue.guaranteed > bestGuaranteed){                    //***if multiple moves available, randomise
+                    bestGuaranteed=moveValue.guaranteed;
+                    bestPotential = moveValue.potential;
+                    System.out.println("Stronger Guarantee found, previous " + bestMoves);
+                    bestMoves.clear();
+                    bestMoves.add(i);
+                } else if(moveValue.guaranteed == bestGuaranteed) {
+                    if (moveValue.potential > bestPotential) {
+
+                        bestPotential = moveValue.potential;
+                        System.out.println("Stronger potential found with same guarantees, previous" + bestMoves);
+
+                        bestMoves.clear();
+                        bestMoves.add(i);
+                    }
+                    else if (moveValue.potential == bestPotential) {
+                        bestMoves.add(i);
+                    }
                 }
             }
         }
-        return bestMove;
+        if(bestMoves.isEmpty()) return -1;
+        Random random = new Random();
+        System.out.println(bestMoves);
+        return bestMoves.get(random.nextInt(bestMoves.size()));
     }
-    private int minimax(int[] board,int depth,boolean isMaximiserTurn){
+    private MoveEvaluation minimax(int[] board,int depth,boolean isMaximiserTurn){
         int score=evaluateBoard();
-        if(score>0){                            //computer wins
-            return score-depth;
+        if(score>0){                            //AI wins, positive score
+            int value = score-depth;
+            return new MoveEvaluation(value,value);
         }
-        if(score<0){
-            return score+depth;
+        if(score<0){                            // player wins, negative score
+            int value = score+depth;
+            return new MoveEvaluation(value,value);
         }        
         
         if(!isMovesLeft()){
-            return 0;
+            //return depth;
+            return new MoveEvaluation(0,0);
         }
-        int best;
+        int bestGuaranteed = Integer.MIN_VALUE;
+        int bestPotential = Integer.MIN_VALUE;
+
         if(isMaximiserTurn){
-            best=-1000;
             for(int i=0;i<TOTAL_MOVES;i++){
                 if(isBlank(i)){
                     board[i]=computer;
-                    best=Math.max(best,minimax(board,depth+1,!isMaximiserTurn));
+                    // Lexicographic comparison
+                    // 1. maximize guaranteed
+                    // 2. maximize exploitability
+
+                    MoveEvaluation eval = minimax(board,depth+1,!isMaximiserTurn);
                     board[i]=BLANK;
+
+                    bestGuaranteed=Math.max(bestGuaranteed,eval.guaranteed);
+                    bestPotential = Math.max(bestPotential,eval.potential);
+
                 }
             }
-            return best-depth;
+            return new MoveEvaluation(bestGuaranteed, bestPotential);
         }
         else{
-            best=1000;
-            int worstForUser=-1000;                                               //user may or may not play ideally,hence the variable to maximise win chances
+            bestGuaranteed=Integer.MAX_VALUE;
+            int worstForUser= Integer.MIN_VALUE;           //user may or may not play ideally,hence the variable to maximise win chances
             for(int i=0;i<TOTAL_MOVES;i++){
                 if(isBlank(i)){
                     board[i]=player;
-                    best=Math.min(best,minimax(board,depth+1,!isMaximiserTurn));
-                    worstForUser=Math.max(worstForUser,minimax(board,depth+1,!isMaximiserTurn));
+                    MoveEvaluation child = minimax(board,depth+1,!isMaximiserTurn);
+
+                    bestGuaranteed=Math.min(bestGuaranteed,child.guaranteed);
                     board[i]=BLANK;
+
+                    worstForUser=Math.max(worstForUser,child.potential);
+
                 }
             }
-            if(best>0){
-                return worstForUser-depth;
-            }
-        }        
-        return best+depth;
+            int finalPotential = (bestGuaranteed == 0) ? worstForUser : bestGuaranteed;
+            return new MoveEvaluation(bestGuaranteed,finalPotential);
+        }
     }
     private boolean isMovesLeft(){
         for (int i = 0; i<TOTAL_MOVES; i++)        
